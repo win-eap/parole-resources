@@ -1,0 +1,16 @@
+label,type
+adult,Age
+youth,Age
+Black people,Ethnicity
+First Nations,Ethnicity
+Inuit,Ethnicity
+Metis,Ethnicity
+non-status,Ethnicity
+status,Ethnicity
+men,Gender
+trans,Gender
+women,Gender
+sex offense,Offense
+violent offense,Offense
+landed immigrants,Other
+non-citizens,Other

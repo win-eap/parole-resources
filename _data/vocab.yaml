@@ -1,0 +1,10 @@
+# lists of terms in csv
+eligibility:
+  - Service eligibility
+  - Restrictions
+categories:
+  - ethnicity
+  - gender
+  - age
+  - offense
+  - other
