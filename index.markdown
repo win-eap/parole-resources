@@ -24,24 +24,25 @@ layout: page
 
 <h2>Eligibility</h2>
 
-<div>
 {% assign groups = site.data.eligibility | group_by: "type" %}
+<table>
 {% for group in groups %}
   {% assign tag = group.name | append: "-" | append: item.label | slugify %}
-  <strong>{{ group.name }}</strong>:
-  {% for item in group.items %}
-    {% assign itemtag = tag | append: " " | append: item.label | slugify %}
-    <br/>&nbsp;&nbsp;{{ item.label }}:
-    <input type="radio" id="{{ itemtag }}-may" name="{{ itemtag }}" value="may" checked="checked">
-    <label for="may">may</label>
-    <input type="radio" id="{{ itemtag }}-must" name="{{ itemtag }}" value="must">
-    <label for="must">must</label>
-    <input type="radio" id="{{ itemtag }}-must-not" name="{{ itemtag }}" value="must not">
-    <label for="must not">must not</label>
-  {% endfor %}
-  {% if forloop.last == false %} <br/> {% endif %}  
+  <tr><td colspan=4><strong>{{ group.name }}</strong>:</td></tr>
+    {% for item in group.items %}
+      <tr>
+      {% assign itemtag = tag | append: " " | append: item.label | slugify %}
+      <td>&nbsp;&nbsp;{{ item.label }}:</td>
+      <td><input class="category" type="radio" id="{{ itemtag }}-may" name="{{ itemtag }}" value="may" checked="checked">
+      <label for="may">may be</label></td>
+      <td><input class="must" type="radio" id="{{ itemtag }}-must" name="{{ itemtag }}" value="must">
+      <label for="must">must be</label></td>
+      <td><input class="mustnot" type="radio" id="{{ itemtag }}-must-not" name="{{ itemtag }}" value="must not">
+      <label for="must not">must not be</label></td>
+      </tr>
+    {% endfor %}
 {% endfor %}
-</div>
+</table>
 
 </form>
 
@@ -58,14 +59,21 @@ layout: page
     {% assign classes = classes | push: serviceclass %}
   {% endfor %}
 
-  {% for key in site.data.vocab.eligibility %}
-    {% for category in site.data.vocab.categories %}
+  {% for key in site.data.vocab.eligibility %}          {%comment%} 'Service eligibility' or 'Restrictions' {%endcomment%}
+    {% for category in site.data.vocab.categories %}    {%comment%} 'Age' etc. {%endcomment%}
       {% assign tagheader = key | append: ' ' | append: category %}
-      {% assign tags = resource[tagheader] | replace: ",", ";" | split: ";" %}
-      {% for tag in tags %}
-        {% assign tagclass = tag | strip | prepend: " " | prepend: tagheader | slugify %}
-        {% assign classes = classes | push: tagclass %}
-      {% endfor %}
+      {% assign tags = resource[tagheader] | strip | replace: ",", ";" | split: ";" %}
+      {% if tags.size == 0 %}                               {%comment%} Create service-eligibility-age-all tag {%endcomment%}
+        {% if key == 'Service eligibility' %}
+          {% assign tagclass = " all" | prepend: tagheader | slugify %}
+          {% assign classes = classes | push: tagclass %}
+        {% endif %}
+      {% else %}
+        {% for tag in tags %}
+          {% assign tagclass = tag | strip | prepend: " " | prepend: tagheader | slugify %}
+          {% assign classes = classes | push: tagclass %}
+        {% endfor %}
+      {% endif %}
     {% endfor %}
   {% endfor %}
 
@@ -129,6 +137,17 @@ layout: page
 {% endfor %}
 
 <script>
+  function allSelector(tag, style) {
+    allTag = tag.split('-');
+    allTag.pop();
+    allTag = allTag.join('-') + "-all";
+    if (style == 'not')
+      return ".resource:not(." + tag + ", ." + allTag + ")";
+    else
+      return ".resource." + tag + ", .resource." + allTag;
+    end
+  }
+
   var form = document.querySelector('form');
   form.addEventListener('change', function() {
     // show all resources
@@ -148,19 +167,51 @@ layout: page
     for (var i=0; i<checkboxes.length; i++) {
       // And stick the checked ones onto an array...
       if (checkboxes[i].checked) {
-        console.log(checkboxes[i].id)
         musts.push(checkboxes[i].id);
       }
     }
-    console.log(musts)
+
+    // select .must or .mustnot radio buttons that are checked
+    var categories = form.querySelectorAll('input[value="must"]:checked');
+    categories.forEach(function(category, index, categories){
+      musts.push("service-eligibility-" + category.name);
+    });
+    console.log("Categories: " + Array.from(categories))
+
+    var categories = form.querySelectorAll('input[value="must not"]:checked');
+    categories.forEach(function(category, index, categories){
+      mustnots.push("restrictions-" + category.name);
+    });
+
+    console.log("musts: " + musts)
+    console.log("mustnots: " + mustnots)
+
+
+
 
     // update view
-    musts.forEach(function(must, index, musts){
-      console.log("must: " + must)
-      havenots = document.querySelectorAll(".resource:not(." + must + ")")
+    // 1. show everything
+    document.querySelectorAll(".resource").forEach(function(resource, index, resources){
+      resource.style.visibility = 'block';
+    });
+    // 2. hide everything that does not have a must
+    musts.forEach(function(must, index, musts) {
+      // havenots = resources that have not(must OR must-all)
+      selector = allSelector(must, "not");
+      console.log("Selector: " + selector);
+      havenots = document.querySelectorAll(selector);
       havenots.forEach(function(havenot, index, havenots) {
-        console.log(havenot.style.visibility)
+        console.log("havenot: " + havenot['id'])
         havenot.style.display = 'none';
+      });
+    });
+    // 3. hide everything that has a mustnot
+    mustnots.forEach(function(mustnot, index, mustnots) {
+      // haves = resources that have mustnot
+      haves = document.querySelectorAll(".resource." + mustnot);
+      haves.forEach(function(have, index, haves) {
+        console.log("have: " + have['id'])
+        have.style.display = 'none';
       });
     });
 
