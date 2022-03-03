@@ -4,27 +4,46 @@
 
 layout: page
 ---
+
+<form id="form">
+
 <h2>Services</h2>
 
 <div>
 {% for service in site.data.services %}
-  <a onclick="alert('Service: {{ service.label }}')">{{ service.label }}</a>
+  {% assign servicetag = service.label | prepend: 'service ' | slugify %}
+  <span class="checkbox">
+    <label for="{{ servicetag }}">
+      {{ service.label}}: 
+      <input type="checkbox" id="{{ servicetag }}" class="serviceCheckbox">
+    </label>
+  </span>
   {% if forloop.last == false %} | {% endif %}
 {% endfor %}
 </div>
 
 <h2>Eligibility</h2>
+
 <div>
 {% assign groups = site.data.eligibility | group_by: "type" %}
 {% for group in groups %}
+  {% assign tag = group.name | append: "-" | append: item.label | slugify %}
   <strong>{{ group.name }}</strong>:
   {% for item in group.items %}
-    <a onclick="alert('{{ group.name }}: {{ item.label }}')">{{ item.label }}</a>
-    {% if forloop.last == false %} | {% endif %}
+    {% assign itemtag = tag | append: " " | append: item.label | slugify %}
+    <br/>&nbsp;&nbsp;{{ item.label }}:
+    <input type="radio" id="{{ itemtag }}-may" name="{{ itemtag }}" value="may" checked="checked">
+    <label for="may">may</label>
+    <input type="radio" id="{{ itemtag }}-must" name="{{ itemtag }}" value="must">
+    <label for="must">must</label>
+    <input type="radio" id="{{ itemtag }}-must-not" name="{{ itemtag }}" value="must not">
+    <label for="must not">must not</label>
   {% endfor %}
   {% if forloop.last == false %} <br/> {% endif %}  
 {% endfor %}
 </div>
+
+</form>
 
 <div>
 
@@ -32,6 +51,13 @@ layout: page
 {% for resource in site.data.resources %}
 
   {% assign classes = "" | split: ";" %}
+
+  {% assign resourceServices = resource['Service'] | split: ';' %}
+  {% for service in resourceServices %}
+    {% assign serviceclass = service | strip | prepend: "service " | slugify %}
+    {% assign classes = classes | push: serviceclass %}
+  {% endfor %}
+
   {% for key in site.data.vocab.eligibility %}
     {% for category in site.data.vocab.categories %}
       {% assign tagheader = key | append: ' ' | append: category %}
@@ -101,3 +127,53 @@ layout: page
     </ul>
   </div>
 {% endfor %}
+
+<script>
+  var form = document.querySelector('form');
+  form.addEventListener('change', function() {
+    // show all resources
+    Array.from(document.getElementsByClassName("resource"))
+    .forEach(function(resource, index, resources) {
+      resource.style.display = 'block';
+    });
+
+    // lists of class tags e.g. service-food-hampers
+    musts = [];
+    mustnots = [];
+
+    // handle services: if checked, hide resource that do not have it
+    var checkboxes = form.querySelectorAll(".serviceCheckbox");
+    var checkboxesChecked = [];
+    // loop over them all
+    for (var i=0; i<checkboxes.length; i++) {
+      // And stick the checked ones onto an array...
+      if (checkboxes[i].checked) {
+        console.log(checkboxes[i].id)
+        musts.push(checkboxes[i].id);
+      }
+    }
+    console.log(musts)
+
+    // update view
+    musts.forEach(function(must, index, musts){
+      console.log("must: " + must)
+      havenots = document.querySelectorAll(".resource:not(." + must + ")")
+      havenots.forEach(function(havenot, index, havenots) {
+        console.log(havenot.style.visibility)
+        havenot.style.display = 'none';
+      });
+    });
+
+  });
+
+  function showResources(classtag) {
+    // classtag is like 'gender-men'
+    console.log(classtag)
+    let eligible = document.getElementsByClassName("service-eligibility-" + classtag);
+    for (let i = 0; i < eligible.length; i++) {
+      console.log(eligible[i].id);
+      eligible[i].style.display = 'block';
+    }
+  }
+</script>
+
