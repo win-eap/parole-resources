@@ -37,8 +37,12 @@ layout: page
       <label for="may">may be</label></td>
       <td><input class="must" type="radio" id="{{ itemtag }}-must" name="{{ itemtag }}" value="must">
       <label for="must">must be</label></td>
-      <td><input class="mustnot" type="radio" id="{{ itemtag }}-must-not" name="{{ itemtag }}" value="must not">
-      <label for="must not">must not be</label></td>
+      <td>
+        {% if group.name != 'Ethnicity' %}
+        <input class="mustnot" type="radio" id="{{ itemtag }}-must-not" name="{{ itemtag }}" value="must not">
+      <label for="must not">must not be</label>
+        {% endif %}
+      </td>
       </tr>
     {% endfor %}
 {% endfor %}
