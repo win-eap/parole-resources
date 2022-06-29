@@ -81,14 +81,14 @@ layout: page
     {% endfor %}
   {% endfor %}
 
-  {% assign id = "org " | append: resource['Organization'] | append: " " | append: resource['Program Name'] | slugify %}
+  {% assign id = "org " | append: resource['Organization'] | append: " " | append: resource['Program name'] | slugify %}
   <div id="{{ id }}" class="resource {{ classes | join: ' ' }}" style="border:  1px solid black; margin: 1em; padding: 1em;">
     <h2>{{ resource['Organization'] }}</h2>
     <ul>
-      <li>Program Name: {{ resource['Program Name'] }}</li>
-      <li>Contact: {{ resource['Contact'] }}</li>
-      <li>Email: {{ resource['Email'] }}</li>
-      <li>Phone: {{ resource['Phone'] }}</li>
+      <li>Program Name: {{ resource['Program name'] }}</li>
+      <li>Contact Name: {{ resource['Contact name'] }}</li>
+      <li>Contact Email: {{ resource['Contact Email'] }}</li>
+      <li>Contact Phone: {{ resource['Contact Phone'] }}</li>
       <li>Webpage: {% if resource['webpage'] != 'x' %}
         <a href="{{ resource['webpage'] }}">{{ resource['webpage'] }}</a>
         {% endif %}
@@ -107,7 +107,7 @@ layout: page
       <tr>
         <td>Ethnicity</td>
         <td>{{ resource['Service eligibility ethnicity'] }}</td>
-        <td>{{ resource['Restrictions ethnicity'] }}</td>
+        <td></td>
       </tr>
       <tr>
         <td>Gender</td>
