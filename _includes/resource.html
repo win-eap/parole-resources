@@ -1,0 +1,52 @@
+{% assign id = "resource " | append: include.resource['Organization Name'] | append: " " | append: include.resource['Program name'] | slugify %}
+<div id="{{ id }}" class="resource {{ include.classes | join: ' ' }}" style="border:  1px solid black; margin: 1em; padding: 1em;">
+  <h2>{{ include.resource['Organization Name'] }}</h2>
+  <ul>
+    <li><span class="label">Timestamp</span>: {{ include.resource["Timestamp"] }}</li>
+    <li><span class="label">Organization Name</span>: {{ include.resource["Organization Name"] }}</li>
+    <li><span class="label">Today's date</span>: {{ include.resource["Today's date"] }}</li>
+    <li><span class="label">Program name</span>: {{ include.resource["Program name"] }}</li>
+    <li><span class="label">Short program description</span>: {{ include.resource["Short program description"] }}</li>
+    <li><span class="label">Type of program</span>: {{ include.resource["Type of program"] }}</li>
+    <li><span class="label">Contact name</span>: {{ include.resource["Contact name"] }}</li>
+
+    <li><span class="label">Phone number</span>: 
+    {% if include.resource["Phone number"] != 'n/a' %}
+    <a href="tel:{{ include.resource["Phone number"] | url_encode }}">{{ include.resource["Phone number"] }}</a> (click to dial)
+    {% else %}
+    {{ include.resource["Phone number"] }}
+    {% endif %}
+    </li>
+
+    <li>
+    <span class="label">Contact email</span>: 
+    {% if include.resource["Contact email"] != 'n/a' %}
+    <a href="email:+{{ include.resource["Contact email"] | url_encode }}">{{ include.resource["Contact email"] }}</a> (click to send email)
+    {% else %}
+    {{ include.resource["Contact email"] }}
+    {% endif %}
+    </li>
+
+    <li><span class="label">Address</span>: 
+    {% if include.resource["Address"] != 'n/a' %}
+    <a href="https://www.google.com/maps/search/?api=1&query={{ include.resource["Address"] | prepend: ", " | prepend: include.resource["Organization Name"] | url_encode }}">{{ include.resource["Address"] }}</a> (click for Google Map)
+    {% else %}
+    {{ include.resource["Address"] }}
+    {% endif %}
+    </li>
+
+    <li><span class="label">Eligible Clients</span>: {{ include.resource["Eligible Clients"] }}</li>
+    <li><span class="label">Details of support</span>: {{ include.resource["Details of support"] }}</li>
+    <li><span class="label">Application process</span>: {{ include.resource["Application process"] }}</li>
+    <li><span class="label">Exclusions</span>: {{ include.resource["Exclusions"] }}</li>
+    <li><span class="label">Identification documents needed</span>: {{ include.resource["Identification documents needed"] }}</li>
+    <li><span class="label">Current waitlist</span>: {{ include.resource["Current waitlist"] }}</li>
+    <li><span class="label">Current COVID restrictions</span>: {{ include.resource["Current COVID restrictions"] }}</li>
+    <li><span class="label">Eligible genders</span>: {{ include.resource["Eligible genders"] }}</li>
+    <li><span class="label">Parent eligibility</span>: {{ include.resource["Parent eligibility"] }}</li>
+    <li><span class="label">Program cost</span>: {{ include.resource["Program cost"] }}</li>
+    <li><span class="label">Cost in dollars</span>: {{ include.resource["Cost in dollars"] }}</li>
+    <li><span class="label">Additional notes</span>: {{ include.resource["Additional notes"] }}</li>
+  </ul>
+
+ </div>

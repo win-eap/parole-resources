@@ -1,0 +1,22 @@
+<div>
+{% comment %} Sort program labels {% endcomment %}
+
+{% capture programlabels %}
+  {%- for program in site.data.programs -%}
+    {{- program.label | strip | append: "|" -}}
+  {%- endfor -%}
+{% endcapture %}
+{% assign programs = programlabels | split: "|" | sort %}
+
+{% comment %} Display program labels with checkboxes {% endcomment %}
+
+{% for program in programs %}
+  {% assign programtag = program | prepend: 'program ' | slugify %}
+  <span class="checkbox">
+    <label for="{{ programtag }}">
+      {{ program | replace: " ", "&nbsp;"}}:&nbsp;
+      <input type="checkbox" id="{{ programtag }}" class="programCheckbox">
+    </label>
+  </span>
+{% endfor %}
+</div>

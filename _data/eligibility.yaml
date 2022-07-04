@@ -1,0 +1,43 @@
+- id: "Clients"
+  tag: "client"
+  values:
+  - "First Nations"
+  - "Metis"
+  - "Inuit"
+  - "Indigenous but OPEN TO ALL"
+  - "A specific demographic only (note this in \"other\" category)"
+  - "Other…"
+- id: "Exclusions"
+  tag: exclusion
+  values:
+  - "No exclusions, all welcome"
+  - "Yes, sexual crime convictions"
+  - "Yes, violent crime convictions"
+  - "Other…"
+- id: "Current waitlist"
+  tag: wait
+  values:
+  - "Yes"
+  - "No"
+- id: "Current COVID restrictions"
+  tag: covid
+  values:
+  - "Yes"
+  - "No"
+- id: "Eligible genders"
+  tag: gender
+  values:
+  - "Men"
+  - "Women"
+  - "Transgender and non-binary people"
+- id: "Parent eligibility"
+  tag: parent
+  values:
+  - "Yes"
+  - "No"
+- id: "Program cost"
+  tag: cost
+  values:
+  - "Yes"
+  - "No"
+  - "Other…"

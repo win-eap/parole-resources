@@ -1,0 +1,19 @@
+{% assign groups = site.data.eligibility | group_by: "type" %}
+<table>
+{% for group in groups %}
+  {% assign tag = group.name | append: " " | append: item.label | slugify %}
+  <tr><td colspan=4><strong>{{ group.name }}</strong>:</td></tr>
+    {% for item in group.items %}
+      <tr>
+      {% assign itemtag = tag | append: " " | append: item.label | slugify %}
+      <td>&nbsp;&nbsp;{{ item.label }}:</td>
+      <td><input class="category" type="radio" id="{{ itemtag }}-may" name="{{ itemtag }}" value="may" checked="checked">
+      <label for="may">none</label></td>
+      <td><input class="must" type="radio" id="{{ itemtag }}-must" name="{{ itemtag }}" value="must">
+      <label for="must">must accept</label></td>
+      <td><input class="mustnot" type="radio" id="{{ itemtag }}-must-not" name="{{ itemtag }}" value="must not">
+      <label for="must not">must not accept</label></td>
+      </tr>
+    {% endfor %}
+{% endfor %}
+</table>
