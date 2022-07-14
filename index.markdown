@@ -15,6 +15,7 @@ layout: page
 {% assign mustscolumn = 'Eligible Clients' %}
 {% assign mustnotscolumn = 'Exclusions' %}
 
+<p>[Test telephone dial link (to Hello Weather service): <a href="tel:1-833-794-3556">1-833-794-3556</a> (click to dial)]</p>
 
 <form id="form">
 
