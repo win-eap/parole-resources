@@ -45,9 +45,9 @@ layout: page
   {% comment %} 
     Populate classes, columnheader, categories, tagheader and tags variables
   {% endcomment %}
-  {% for field in site.data.fields %}
-    {% assign fieldtag = field[0] %}  
-    {% assign columnheader = field[1] %}
+  {% for field in site.data.eligibility %}
+    {% assign fieldtag = field['tag'] %}  
+    {% assign columnheader = field['id'] %}
     {% assign categories = resource[columnheader] | replace: "No information, FOLLOW UP NEEDED", "" | replace: ", ", "," | split: ',' %}    
     {% for category in categories %}    {%comment%} Name of checkbox {%endcomment%}
       {% if category != 'No information' %}

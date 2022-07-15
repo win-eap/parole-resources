@@ -1,8 +1,0 @@
-# lists of fields in csv
-client: Eligible Clients
-wait: Current waitlist
-covid: Current COVID restrictions
-gender: Eligible genders
-parent: Parent eligibility
-cost: Program cost
-exclusion: Exclusions
