@@ -1,0 +1,17 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+#countBox {
+  border: 1px solid black; 
+  padding: 1em; 
+  margin: 1em; 
+  text-align: 
+  center; 
+  font-weight: bold;
+}
+
+.label { font-weight: bold; }
+span.checkbox { padding-right: 2em; }
+.eligibility-group { margin-top: 1em; }

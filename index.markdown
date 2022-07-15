@@ -5,12 +5,6 @@
 layout: page
 ---
 
-<style>
-  .label { font-weight: bold; }
-  span.checkbox { padding-right: 2em; }
-  .eligibility-group { margin-top: 1em; }
-</style>
-
 {% assign programcolumn = 'Type of program' %}
 {% assign mustscolumn = 'Eligible Clients' %}
 {% assign mustnotscolumn = 'Exclusions' %}
@@ -23,7 +17,9 @@ layout: page
 
 {% include programs.html %}
 
-<div style="border: 1px solid black; padding: 1em; margin: 1em; text-align: center; font-weight: bold;"><span id="displayCount">all</span> resources.</div>
+<div id="countBox">
+  <span id="displayCount">all</span> resources.
+</div>
 
 <h2>Eligibility</h2>
 
