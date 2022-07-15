@@ -7,7 +7,6 @@ layout: page
 
 {% assign programcolumn = 'Type of program' %}
 {% assign mustscolumn = 'Eligible Clients' %}
-{% assign mustnotscolumn = 'Exclusions' %}
 
 <p>[Test telephone dial link (to Hello Weather service): <a href="tel:1-833-794-3556">1-833-794-3556</a> (click to dial)]</p>
 
@@ -31,7 +30,9 @@ layout: page
 
 {% comment %} Add classes to resources {% endcomment %}
 
-{% for resource in site.data.resources %}
+{% assign sortedResources = site.data.resources | sort: "Program name" %}
+
+{% for resource in sortedResources %}
 
   {% assign classes = "" | split: ";" %}
 
