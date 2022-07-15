@@ -103,7 +103,6 @@ layout: page
 
     // lists of class tags e.g. program-food-hampers
     musts = [];
-    mustnots = [];
 
     // handle programs: if checked, hide resource that do not have it
     var checkboxes = form.querySelectorAll(".programCheckbox");
@@ -122,16 +121,7 @@ layout: page
       console.log("Add to musts: " + category.id)
       musts.push(category.id);
     });
-/*
-    var categories = form.querySelectorAll('input.eligibilityCheckbox:checked');
-    categories.forEach(function(category, index, categories){
-      mustnots.push("restrictions-" + category.name);
-    });
-*/
     console.log("musts: " + musts)
-    console.log("mustnots: " + mustnots)
-
-
 
     resourceCount = 0;
     hidingCount = 0;
@@ -154,20 +144,7 @@ layout: page
         }
       });
     });
-    /*
-    // 3. hide everything that has a mustnot
-    mustnots.forEach(function(mustnot, index, mustnots) {
-      // haves = resources that have mustnot
-      haves = document.querySelectorAll(".resource." + mustnot);
-      haves.forEach(function(have, index, haves) {
-        console.log("have: " + have['id'])
-        if (havenot.style.display == 'block') {
-          have.style.display = 'none';
-          hidingCount += 1;
-        }
-      });
-    });
-    */
+
     updateDisplayCount(resourceCount, hidingCount);
   });
 
