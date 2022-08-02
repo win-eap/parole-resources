@@ -41,7 +41,7 @@ jobs:
           endpoint: "https://sheets.googleapis.com/v4/spreadsheets/${{ secrets.GSHEET_ID }}/values:batchGet"
           configuration: '{ "method": "GET", "headers": {"Authorization": "Bearer ${{ steps.auth.outputs.access_token }}"} }'
           save-location: _data
-          save-name: resources
+          save-name: raw_resources
       - name: Process spreadsheet data with jq
         run: |
           jq -r ".valueRanges[0].values | .[] | @csv" < _data/raw_resources.json > _data/temp.csv
