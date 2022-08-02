@@ -45,7 +45,7 @@ jobs:
           set-output: false # do not set environment variable
       - name: Process spreadsheet data with jq
         run: |
-          npm install csvjson
+          pip install csvkit # get csvjson
           ls -l _data
           head _data/raw_resources.json
           jq -r ".valueRanges[0].values | .[] | @csv" < _data/raw_resources.json > _data/temp.csv
