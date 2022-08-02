@@ -37,6 +37,8 @@ jobs:
           ls /opt/hostedtoolcache/Ruby/2.7.6/x64/bin
           echo "gem list bundle"
           gem list bundle
+          echo "gem list jekyll"
+          gem list jekyll
           echo "which bundle"
           which bundler
           echo "which jekyll"
