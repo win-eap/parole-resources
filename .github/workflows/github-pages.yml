@@ -36,6 +36,8 @@ jobs:
           echo "ls .../bin"
           ls /opt/hostedtoolcache/Ruby/2.7.6/x64/bin
           bundle install
+          bundle exec jekyll help
+          ls ./vendor/bundle
           ls /opt/hostedtoolcache/Ruby/2.7.6/x64/bin
           echo "gem list bundle"
           gem list bundle
