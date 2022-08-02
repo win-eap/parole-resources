@@ -2,5 +2,6 @@ _site/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
-_data/resources.csv
+_data/raw_resources.json
+_data/resources.json
 .bash_history
