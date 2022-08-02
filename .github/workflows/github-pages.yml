@@ -45,6 +45,8 @@ jobs:
           set-output: false # do not set environment variable
       - name: Process spreadsheet data with jq
         run: |
+          ruby --version
+          bundle --version
           pip install csvkit # get csvjson
           ls -l _data
           head _data/raw_resources.json
@@ -55,6 +57,7 @@ jobs:
           head -2 _data/resources.json
       - name: Install and Build 🔧
         run: |
+          bundle install
           jekyll build
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
