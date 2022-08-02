@@ -46,8 +46,7 @@ jobs:
       - name: Process spreadsheet data with jq
         run: |
           ruby --version
-          gem update --system
-          gem install bundler
+          gem install --user-install bundler
           bundle --version
           pip install csvkit # get csvjson
           ls -l _data
