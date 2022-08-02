@@ -35,6 +35,8 @@ jobs:
           gem env
           echo "ls .../bin"
           ls /opt/hostedtoolcache/Ruby/2.7.6/x64/bin
+          bundle install
+          ls /opt/hostedtoolcache/Ruby/2.7.6/x64/bin
           echo "gem list bundle"
           gem list bundle
           echo "gem list jekyll"
