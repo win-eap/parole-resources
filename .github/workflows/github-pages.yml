@@ -44,6 +44,8 @@ jobs:
           save-name: raw_resources
       - name: Process spreadsheet data with jq
         run: |
+          ls -l _data
+          head _data/raw_resources.json
           jq -r ".valueRanges[0].values | .[] | @csv" < _data/raw_resources.json > _data/temp.csv
           echo "Rows: `wc -l _data/temp.csv`"
           csvjson _data/temp.csv > _data/resources.json
