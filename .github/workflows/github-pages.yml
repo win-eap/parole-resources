@@ -27,6 +27,10 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
           restore-keys: |
             ${{ runner.os }}-gems-
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7' # Not needed with a .ruby-version file
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0.4.0'
@@ -45,9 +49,6 @@ jobs:
           set-output: false # do not set environment variable
       - name: Process spreadsheet data with jq
         run: |
-          ruby --version
-          gem install --user-install bundler
-          bundle --version
           pip install csvkit # get csvjson
           ls -l _data
           head _data/raw_resources.json
