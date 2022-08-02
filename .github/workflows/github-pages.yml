@@ -60,7 +60,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           bundle install
-          jekyll build
+          bundle exec jekyll build
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
