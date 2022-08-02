@@ -32,8 +32,8 @@ jobs:
         uses: 'google-github-actions/auth@v0.4.0'
         with:
           token_format: 'access_token'
-          workload_identity_provider: '{{ secrets.GOOGLE_WIP }}'
-          service_account: '{{ secrets.GOOGLE_SERVICE_ACCOUNT }}'
+          workload_identity_provider: '${{ secrets.GOOGLE_WIP }}'
+          service_account: '${{ secrets.GOOGLE_SERVICE_ACCOUNT }}'
           access_token_scopes: 'https://www.googleapis.com/auth/spreadsheets.readonly'
       - name: Fetch API Data 📦
         uses: JamesIves/fetch-api-data-action@v2
