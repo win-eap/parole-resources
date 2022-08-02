@@ -3,6 +3,7 @@ name: Build and deploy Jekyll site to GitHub Pages
 # Triggered by external to REST API
 on:
   workflow_dispatch
+  push
 
 # Cancel any workflows that are already running. This ensures
 # that the latest-triggered of any competing workflow runs is 
@@ -57,9 +58,8 @@ jobs:
           csvjson _data/temp.csv > _data/resources.json
           rm _data/temp.csv _data/raw_resources.json
           head -2 _data/resources.json
-      - name: Install and Build 🔧
-        run: |
-          bundle exec jekyll build
+      - name: Build Jekyll
+        uses:  lemonarc/jekyll-action@1.0.0
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
