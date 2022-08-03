@@ -31,7 +31,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 'ruby-2.7' # Not needed with a .ruby-version file
-          bundler-cache: true
+          bundler-cache: false
       - run: |
           # sudo ln -s /usr/local/bin/ruby /usr/bin/ruby-2.7 # from https://stackoverflow.com/questions/36837382/usr-bin-env-ruby-no-such-file-or-directory-cannot-use-bundler-nor-rails
           /usr/bin/env ruby --version
