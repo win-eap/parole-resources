@@ -2,7 +2,8 @@ name: Build and deploy Jekyll site to GitHub Pages
 
 # Triggered by external to REST API
 on:
-  workflow_dispatch
+  - workflow_dispatch
+  - push
 
 # Cancel any workflows that are already running. This ensures
 # that the latest-triggered of any competing workflow runs is 
@@ -72,13 +73,10 @@ jobs:
           csvjson _data/temp.csv > _data/resources.json
           rm _data/temp.csv _data/raw_resources.json
           head -2 _data/resources.json
-      - name: Install and Build 🔧
-        run: |
           bundle exec jekyll build
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: _site # The folder the action should deploy.
-          target_folder: .
-          token: ${{ secrets.GH_PAT }}
+          rm -r _data 
+          rsync -a --delete _site/* ./
+          touch .nojekyll
+          git add .
+          git commit -m "Rendered site"
+          git push --force
