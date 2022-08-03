@@ -30,7 +30,6 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '2.7' # Not needed with a .ruby-version file
-          # bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - run: |
           gem env
           echo "ls .../bin"
@@ -81,3 +80,4 @@ jobs:
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: _site # The folder the action should deploy.
+          token: ${{ secrets.GH_PAT }}
