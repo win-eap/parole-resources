@@ -31,8 +31,8 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '2.7.6' # Not needed with a .ruby-version file
-      - run |
-        ln -s /usr/local/bin/ruby /usr/bin/ruby # from https://stackoverflow.com/questions/36837382/usr-bin-env-ruby-no-such-file-or-directory-cannot-use-bundler-nor-rails
+      - run: |
+          ln -s /usr/local/bin/ruby /usr/bin/ruby # from https://stackoverflow.com/questions/36837382/usr-bin-env-ruby-no-such-file-or-directory-cannot-use-bundler-nor-rails
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0.4.0'
