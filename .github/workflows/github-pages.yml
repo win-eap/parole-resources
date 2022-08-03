@@ -30,7 +30,7 @@ jobs:
 #            ${{ runner.os }}-gems-
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 'ruby-2.7' # Not needed with a .ruby-version file
+          ruby-version: 'ruby-2.7.6' # Not needed with a .ruby-version file
           bundler-cache: true
       - run: |
           sudo ln -s /opt/hostedtoolcache/Ruby/2.7.6/x64/bin/ruby /opt/hostedtoolcache/Ruby/2.7.6/x64/bin/ruby-2.7 # from https://stackoverflow.com/questions/36837382/usr-bin-env-ruby-no-such-file-or-directory-cannot-use-bundler-nor-rails
