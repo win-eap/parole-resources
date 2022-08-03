@@ -73,10 +73,16 @@ jobs:
           csvjson _data/temp.csv > _data/resources.json
           rm _data/temp.csv _data/raw_resources.json
           head -2 _data/resources.json
-          bundle exec jekyll build
-          rm -r _data 
-          rsync -a --delete _site/* ./
-          touch .nojekyll
-          git add .
-          git commit -m "Rendered site"
-          git push --force
+
+      - uses: helaili/jekyll-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target_branch: 'gh-pages'
+
+#          bundle exec jekyll build
+#          rm -r _data 
+#          rsync -a --delete _site/* ./
+#          touch .nojekyll
+#          git add .
+#          git commit -m "Rendered site"
+#          git push --force
