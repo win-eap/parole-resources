@@ -38,6 +38,7 @@ jobs:
           ruby --version
           ls -l /opt/hostedtoolcache/Ruby/2.7.6/x64/bin/ruby*
           gem install ffi
+          find ./vendor -name ffi_c
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0.4.0'
