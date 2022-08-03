@@ -2,7 +2,8 @@ name: Build and deploy Jekyll site to GitHub Pages
 
 # Triggered by external to REST API
 on:
-  workflow_dispatch
+  - workflow_dispatch
+  - push
 
 # Cancel any workflows that are already running. This ensures
 # that the latest-triggered of any competing workflow runs is 
