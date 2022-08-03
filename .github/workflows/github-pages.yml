@@ -74,10 +74,15 @@ jobs:
           rm _data/temp.csv _data/raw_resources.json
           head -2 _data/resources.json
 
-      - uses: helaili/jekyll-action@v2
+      - name: 🔨 install dependencies & build site
+        uses: limjh16/jekyll-action-ts@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          target_branch: 'gh-pages'
+          enable_cache: true
+      - name: 🚀 deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
 
 #          bundle exec jekyll build
 #          rm -r _data 
