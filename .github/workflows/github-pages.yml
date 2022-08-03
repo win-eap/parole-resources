@@ -36,7 +36,7 @@ jobs:
           # sudo ln -s /usr/local/bin/ruby /usr/bin/ruby-2.7 # from https://stackoverflow.com/questions/36837382/usr-bin-env-ruby-no-such-file-or-directory-cannot-use-bundler-nor-rails
           /usr/bin/env ruby --version
           ruby --version
-          ls -l /usr/bin/ruby*
+          ls -l /opt/hostedtoolcache/Ruby/2.7.6/x64/bin/ruby*
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0.4.0'
