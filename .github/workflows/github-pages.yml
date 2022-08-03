@@ -37,7 +37,7 @@ jobs:
           /usr/bin/env ruby --version
           ruby --version
           #locate -b ruby-2.7
-          ls /usr/bin/ruby*
+          ls -l /usr/bin/ruby*
           ls /usr/local/bin/ruby*
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
