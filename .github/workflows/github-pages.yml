@@ -31,22 +31,6 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '2.7' # Not needed with a .ruby-version file
-      - run: |
-          gem env
-          echo "ls .../bin"
-          ls /opt/hostedtoolcache/Ruby/2.7.6/x64/bin
-          bundle install
-          bundle exec jekyll help
-          ls ./vendor/bundle
-          ls /opt/hostedtoolcache/Ruby/2.7.6/x64/bin
-          echo "gem list bundle"
-          gem list bundle
-          echo "gem list jekyll"
-          gem list jekyll
-          echo "which bundle"
-          which bundler
-          echo "which jekyll"
-          which jekyll
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v0.4.0'
