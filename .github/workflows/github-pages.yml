@@ -72,10 +72,10 @@ jobs:
           echo "Rows: `wc -l _data/temp.csv`"
           csvjson _data/temp.csv > _data/resources.json
           echo "raw_resources.json"
-          cat _data/raw_resources.csvjson
+          cat _data/raw_resources.json
           echo ""
           echo "temp.csv"
-          cat temp.csv
+          cat _data/temp.csv
       - run: |
           rm _data/temp.csv _data/raw_resources.json
           head -2 _data/resources.json
