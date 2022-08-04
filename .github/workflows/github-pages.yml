@@ -78,8 +78,8 @@ jobs:
           filename: "_data/raw_resources.json"
           overwrite: "true" # optional boolean
       - run: |
-        rm _data/temp.csv _data/raw_resources.json
-        head -2 _data/resources.json
+          rm _data/temp.csv _data/raw_resources.json
+          head -2 _data/resources.json
       - name: Install and Build 🔧
         run: |
           bundle exec jekyll build
