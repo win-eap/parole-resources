@@ -71,12 +71,11 @@ jobs:
           jq -r ".valueRanges[0].values | .[] | @csv" < _data/raw_resources.json > _data/temp.csv
           echo "Rows: `wc -l _data/temp.csv`"
           csvjson _data/temp.csv > _data/resources.json
-      - name: Upload to gdrive
-        uses: adityak74/google-drive-upload-git-action@main
-        with:
-          credentials: ${{ secrets.GOOGLE_WIP }}
-          filename: "_data/raw_resources.json"
-          overwrite: "true" # optional boolean
+          echo "raw_resources.json"
+          cat _data/raw_resources.csvjson
+          echo ""
+          echo "temp.csv"
+          cat temp.csv
       - run: |
           rm _data/temp.csv _data/raw_resources.json
           head -2 _data/resources.json
