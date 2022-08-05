@@ -1,12 +1,12 @@
 {% assign groups = site.data.eligibility %}
 {% for group in groups %}
-  <div class="eligibility-group"><strong>{{ group.id }}</strong>:<br/>
+  <div class="eligibility-group checkbox-group"><strong>{{ group.id }}</strong>:<br/>
     {% for value in group.values %}
       {% assign tag = group.tag | append: " " | append: value | slugify %}
-      <span class="checkbox">
+      <label class="checkbox">
       {{ value | replace: " ", "&nbsp;"}}:&nbsp;
       <input type="checkbox" id="{{ tag }}" class="eligibilityCheckbox" name="{{ value | slugify }}"/>
-    </span>
+    </label>
     {% endfor %}
   </div>
 {% endfor %}

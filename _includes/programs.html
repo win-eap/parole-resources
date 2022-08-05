@@ -1,4 +1,4 @@
-<div>
+<div class="checkbox-group">
 {% comment %} Sort program labels {% endcomment %}
 
 {% capture programlabels %}
@@ -12,11 +12,9 @@
 
 {% for program in programs %}
   {% assign programtag = program | prepend: 'program ' | slugify %}
-  <span class="checkbox">
-    <label for="{{ programtag }}">
-      {{ program | replace: " ", "&nbsp;"}}:&nbsp;
-      <input type="checkbox" id="{{ programtag }}" class="programCheckbox">
-    </label>
-  </span>
+  <label class="checkbox">
+    {{ program | replace: " ", "&nbsp;"}}:&nbsp;
+    <input type="checkbox" id="{{ programtag }}" class="programCheckbox">
+  </label>
 {% endfor %}
 </div>

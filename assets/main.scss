@@ -13,5 +13,15 @@
 }
 
 .fields li span { font-weight: bold; }
-span.checkbox { padding-right: 2em; }
+label.checkbox { 
+  padding:5px;
+  margin: 5px 2em 0 0;
+  background: #ddd;
+  display: inline-block;
+  white-space: nowrap;
+}
 .eligibility-group { margin-top: 1em; }
+.checkbox-group {
+  text-align: center;
+  border: 1px solid #ddd;
+}
