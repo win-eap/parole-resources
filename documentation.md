@@ -14,7 +14,7 @@ title: Documentation
 - The site depends on metadata with controlled vocabularies for the two sections that are used to select services that meet a given user's needs:
   - **resources**: organizations that provide services; represented by entries in the form, and by rows in the Sheet and in the csv.
   - **services**: specific services provided by an organization, e.g. "Food and Clothing". These are listed in the "Type of program" section of the form, and therefore in the "Type of program" column of the csv. 
-  - **eligibility**: characteristics which qualify or disqualify a user from using a resource. In the "Eligibility" question are listed the characteristics which users **must** have to use the resource; in the "Exclusions" question are listed the characteristcs they **must not** have. 
+  - **eligibility**: characteristics which qualify or disqualify a user from using a resource. In the "Eligibility" question are listed the characteristics which users **must** have to use the resource; in the "Exclusions" question are listed the characteristics they **must not** have. 
 - **Note: service and eligibility names must not contain commas.** The csv uses commas to separate names in the list, and would be confused by commas in the names.
   - note also that changing the question title in the form does not update the entries in the spreadsheet: they will have to updated by search-and-replace or by hand.
   
