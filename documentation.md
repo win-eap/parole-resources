@@ -5,7 +5,7 @@ title: Documentation
 
 ## Data management
 
-- the data is managed in a [Google Sheet](https://docs.google.com/spreadsheets/d/1h8iZt6ceY0YvhZryutdLVoaU6H3WONkZssaew_hxb9I), which belongs to Allison Sivak. It is updated via a [Google Form](https://docs.google.com/forms/d/1z9oOI93xfNi7I8pzawDH5w6IquFcG8o4ej9POvISXCk/edit).
+- the data is managed in a [Google Sheet](https://docs.google.com/spreadsheets/d/1h8iZt6ceY0YvhZryutdLVoaU6H3WONkZssaew_hxb9I). It is updated via a [Google Form](https://docs.google.com/forms/d/1z9oOI93xfNi7I8pzawDH5w6IquFcG8o4ej9POvISXCk/edit). These belong to the win-eap Google account.
 - to populate the demo website, the Sheet is downloaded as ```csv``` and saved as ```_data/resources.csv```
 - Note that the question titles in the Google Form become the column headings in the csv file, and therefore should not be changed. If they are changed, the processing code in ```index.markdown``` will have to be changed accordingly.
 
