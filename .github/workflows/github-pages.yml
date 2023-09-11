@@ -30,7 +30,7 @@ jobs:
             ${{ runner.os }}-gems-
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7' # Not needed with a .ruby-version file
+          ruby-version: '2.7'
       - run: |
           gem env
           echo "ls .../bin"
