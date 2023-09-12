@@ -18,7 +18,7 @@ permissions:
   id-token: write
 
 jobs:
-  github-pages:
+  github_pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -35,12 +35,8 @@ jobs:
       - run: |
           gem env
           echo "ls .../bin"
-#          ls /opt/hostedtoolcache/Ruby/2.7.6/x64/bin
-#          ls /opt/hostedtoolcache/Ruby/
           bundle install
           bundle exec jekyll help
-#          ls ./vendor/bundle
-#          ls /opt/hostedtoolcache/Ruby/2.7.6/x64/bin
           echo "gem list bundle"
           gem list bundle
           echo "gem list jekyll"
@@ -91,3 +87,46 @@ jobs:
           folder: _site # The folder the action should deploy.
           target_folder: .
           token: ${{ secrets.GH_PAT }}
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0.4.0'
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: '${{ secrets.GOOGLE_WIP }}'
+          service_account: '${{ secrets.GOOGLE_SERVICE_ACCOUNT }}'
+          access_token_scopes: 'https://www.googleapis.com/auth/spreadsheets.readonly'
+      - name: Fetch API Data 📦
+        uses: JamesIves/fetch-api-data-action@v2
+        with:
+          endpoint: "https://sheets.googleapis.com/v4/spreadsheets/${{ secrets.GSHEET_ID }}/values:batchGet?ranges=A1%3AW1000&majorDimension=ROWS"
+          configuration: '{ "method": "GET", "headers": {"Authorization": "Bearer ${{ steps.auth.outputs.access_token }}"} }'
+          save-location: _data
+          save-name: raw_resources
+          set-output: false # do not set environment variable
+      - name: Process spreadsheet data with jq
+        run: |
+          pip install csvkit # get csvjson
+          ls -l _data
+          head _data/raw_resources.json
+          jq -r ".valueRanges[0].values | .[] | @csv" < _data/raw_resources.json > _data/temp.csv
+          echo "Rows: `wc -l _data/temp.csv`"
+          csvjson _data/temp.csv > _data/resources.json
+          echo "raw_resources.json"
+          cat _data/raw_resources.json
+          echo ""
+          echo "temp.csv"
+          cat _data/temp.csv
+      - run: |
+          rm _data/temp.csv _data/raw_resources.json
+          head -2 _data/resources.json
+      - name: Install and Build 🔧
+        run: |
+          bundle exec jekyll build
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: _site # The folder the action should deploy.
+          target_folder: .
+          token: ${{ secrets.GH_PAT }}
+      
