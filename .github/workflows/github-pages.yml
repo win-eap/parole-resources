@@ -16,6 +16,7 @@ concurrency:
 # use in fetch step
 permissions:
   id-token: write
+  contents: write
 
 jobs:
   github-pages:
