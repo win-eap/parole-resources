@@ -30,7 +30,7 @@ layout: page
 
 {% comment %} Add classes to resources {% endcomment %}
 
-{% assign sortedResources = site.data.resources | sort: "Program name" %}
+{% assign sortedResources = site.data.resources | sort_natural: "Program name" %}
 
 {% for resource in sortedResources %}
 
